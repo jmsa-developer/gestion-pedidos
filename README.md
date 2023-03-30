@@ -108,5 +108,5 @@ with PHPUnit
 Tests can be executed by running
 
 ```
-php .\vendor\bin\phpunit tests
+php .\vendor\bin\phpunit tests --testdox --colors=always
 ```
