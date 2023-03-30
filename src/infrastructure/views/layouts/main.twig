@@ -1,0 +1,74 @@
+    {{ void(this.beginPage()) }}
+
+    {{ use('yii/helpers/Html') }}
+    {{ use('yii/helpers/Url') }}
+
+
+{{ use('app/src/infrastructure/assets/AppAsset') }}
+
+{{ register_app_asset() }}
+
+
+<!DOCTYPE html>
+<html lang="{{ app.language }}" class="h-100">
+<head>
+    <meta charset="{{ app.charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ html.encode(this.title) }}</title>
+    {{ html.csrfMetaTags | raw }}
+    {{ void(this.head) }}
+</head>
+<body class="d-flex flex-column h-100">
+{{ void(this.beginBody()) }}
+<section id="header">
+    {{ use('yii/bootstrap5/Nav') }}
+    {{ use('yii/bootstrap5/NavBar') }}
+    {{ nav_bar_begin({
+        'brandLabel': app.name,
+        'brandUrl' : app.homeUrl,
+        'options' : {
+            'class' : 'navbar-expand-md navbar-dark bg-dark fixed-top',
+        }
+    }) }}
+    {% set menuItems = [] %}
+    {% if app.user.isGuest == false %}
+        {% set menuItems = menuItems|merge([
+            {'label' : 'Home', 'url' : ['/site/index']},
+            {'label' : 'Products', 'url' : ['/product/index']},
+
+            {
+                'label' : 'logout (' ~ app.user.identity.username ~ ')',
+                'url' : ['/site/logout'],
+                'linkOptions' : {'data-method' : 'post'}
+            }
+        ])
+    %}
+    {% else %}
+        {% set menuItems = menuItems|merge([
+            {'label' : 'login', 'url' : ['/site/login']},
+
+        ])
+    %}
+    {% endif %}
+    {{ nav_widget({
+        'options': {
+            'class': 'navbar-nav navbar-right',
+        },
+        'items': menuItems
+    }) }}
+    {{ nav_bar_end() }}
+</section>
+<main id="main" class="flex-shrink-0" role="main">
+    <div class="container">
+        {{ content | raw }}
+    </div>
+</main>
+<footer class="footer">
+    <div class="container">
+        {# footer content #}
+    </div>
+</footer>
+{{ void(this.endBody()) }}
+</body>
+</html>
+{{ void(this.endPage()) }}

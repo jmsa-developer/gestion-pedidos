@@ -1,0 +1,24 @@
+{{ set(this, 'title', 'Orders') }}
+{{ use('yii/grid/GridView') }}
+
+<div class="site-products">
+    <div class="body-content">
+        <div class="row">
+            <h1>{{ this.title }}</h1>
+            <h3><a href="create" class="btn btn-success">Create product</a></h3>
+        </div>
+        <div class="row">
+            {{ grid_view_widget({
+                'dataProvider': dataProvider,
+                'columns': [
+                    {'class': '\\yii\\grid\\SerialColumn'},
+                    'name',
+                    'price',
+                    'description',
+                    {'class': '\\yii\\grid\\ActionColumn', 'template': '{view} {update} {delete}'}
+
+                ]
+            }) }}
+        </div>
+    </div>
+</div>

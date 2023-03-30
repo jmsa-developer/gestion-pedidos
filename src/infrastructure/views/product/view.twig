@@ -1,0 +1,22 @@
+{{ set(this, 'title', 'Orders') }}
+{{ use('yii/widgets/DetailView') }}
+
+<div class="site-product">
+    <div class="body-content">
+        <div class="row">
+            <h1>{{ this.title }}</h1>
+        </div>
+        <div class="row">
+            {{ detail_view_widget({
+                'model': model,
+                'attributes': [
+                    'id',
+                    'name',
+                    'description',
+                    'price'
+                ],
+            })
+            }}
+        </div>
+    </div>
+</div>

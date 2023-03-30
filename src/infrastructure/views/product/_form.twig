@@ -1,0 +1,31 @@
+{{ set(this, 'title', 'Create Order') }}
+{{ use('yii/widgets/ActiveForm') }}
+
+<div class="site-products">
+    <div class="body-content">
+        <div class="row">
+            <h1>{{ this.title }}</h1>
+        </div>
+        <div class="row">
+
+            {% set form = active_form_begin({
+                'id' : 'product-form',
+                'options' : {'class' : 'form-horizontal'},
+            }) %}
+            <div class="form-group">
+                    {{ form.field(model, 'name') | raw }}
+            </div>
+            <div class="form-group">
+                    {{ form.field(model, 'description') | raw }}
+            </div>
+            <div class="form-group">
+                    {{ form.field(model, 'price') | format('USD') | raw }}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            {{ active_form_end() }}
+        </div>
+    </div>
+</div>
