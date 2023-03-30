@@ -62,7 +62,6 @@ return [
 ```
 
 Install dependencies with Composer
-
     ```
     composer install  
     ```
@@ -78,7 +77,6 @@ Apply migrations
    ```
 
 Start web server:
-
     ```
     .\yii serve
     ```
